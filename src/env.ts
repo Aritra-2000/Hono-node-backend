@@ -9,6 +9,10 @@ export const EnvSchema = z.object({
     PORT: z.coerce.number().default(3000),
     LOG_LEVEL: z.enum(['debug','info', 'warn', 'error' ,'fatal']).default('info'),
     DATABASE_URL: z.url(),
+    BETTER_AUTH_SECRET: z.string(),
+    BETTER_AUTH_URL: z.url(),
+    EMAIL_USER: z.email(),
+    EMAIL_PASS: z.string(),
 })
 
 export type Env = z.infer<typeof EnvSchema>;
