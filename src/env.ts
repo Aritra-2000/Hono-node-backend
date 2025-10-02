@@ -13,6 +13,9 @@ export const EnvSchema = z.object({
     BETTER_AUTH_URL: z.url(),
     EMAIL_USER: z.email(),
     EMAIL_PASS: z.string(),
+    ZERODHA_BASE_URL: z.url(),
+    ZERODHA_API_KEY: z.string().min(1, 'Zerodha API Key is required'),
+    ZERODHA_API_SECRET: z.string().min(1, 'Zerodha API Secret is required'),
 })
 
 export type Env = z.infer<typeof EnvSchema>;

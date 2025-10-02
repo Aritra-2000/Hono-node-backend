@@ -1,15 +1,15 @@
 import createApp from "@/lib/create-app.js";
 import configureOpenAPI from "./lib/configure-open-api.js";
-import index from "@/routes/index.route.js"
 import { swaggerUI } from '@hono/swagger-ui';
 import auths from "@/routes/auths/auths.index.js"
+import brokers from "@/routes/brokers/brokers.index.js"
 import { auth } from "./lib/auth.js";
 
 const app = createApp();
 
 const routes = [
-    index,
-    auths
+    auths,
+    brokers
 ];
 
 configureOpenAPI(app);

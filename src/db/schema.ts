@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, numeric, integer} from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -59,4 +59,35 @@ export const verification = pgTable("verification", {
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
+
+export const brokerToken = pgTable("broker_token", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  broker: text("broker").notNull(), 
+  accessToken: text("access_token").notNull(),
+  refreshToken: text("refresh_token"),
+  expiresAt: timestamp("expires_at").notNull(), 
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
+});
+
+export const trade = pgTable("trade", {
+  id: text("id").primaryKey(),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  broker: text("broker").notNull(),
+  symbol: text("symbol").notNull(),
+  quantity: integer("quantity").notNull(),
+  price: numeric("price", { precision: 12, scale: 2 }).notNull(),
+  side: text("side").$type<"BUY" | "SELL">().notNull(),
+  timestamp: timestamp("timestamp").notNull(), 
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 
