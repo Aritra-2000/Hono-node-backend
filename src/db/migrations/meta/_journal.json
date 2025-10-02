@@ -15,6 +15,13 @@
       "when": 1758389521973,
       "tag": "0001_high_thanos",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1759384332238,
+      "tag": "0002_tricky_ultimo",
+      "breakpoints": true
     }
   ]
 }
